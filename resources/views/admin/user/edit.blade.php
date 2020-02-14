@@ -717,12 +717,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">User List</h1>
+                        <h1 class="m-0 text-dark">Dashboard</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User List</li>
+                            <li class="breadcrumb-item active">Dashboard v1</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -735,58 +735,57 @@
             <div class="container-fluid">
                 <div class="row">
                     <!-- left column -->
-                    <div class="col-md-12">
-                        <div class="card">
+                    <div class=" offset-3 col-md-6">
+                        <!-- general form elements -->
+                        <div class="card card-primary">
                             <div class="card-header">
-                                <h3 class="card-title">All Users List</h3>
-
-                                <div class="card-tools">
-                                    <ul class="pagination pagination-sm float-right">
-                                        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                                    </ul>
-                                </div>
+                                <h3 class="card-title">Edit user details</h3>
                             </div>
                             <!-- /.card-header -->
-                            <div class="card-body p-0">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 10px">#</th>
-                                        <th>Name</th>
-                                        <th>email</th>
-                                        <th>Phone</th>
-                                        <th>Operations</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                          @foreach ($table as $user)
-                              <tr>
-                                  <td>{{$user->id}}</td>
-                                  <td>{{$user->name}}</td>
-                                  <td>{{$user->email}}</td>
-                                  <td>{{$user->phone}}</td>
-                                  <td><a href="{{route('user.edit',$user->id)}}" class="btn btn-primary btn-sm">EDIT</a>||
-                                  <form action="{{route('user.destroy',$user->id)}}" method="post">
-                                      @csrf
-                                      @method('delete')
-                                      <button type="submit" class="btn btn-danger btn-sm"> DELETE</button>
-                                  </form>
-                                  </td>
-                              </tr>
-                          @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <!-- /.card-body -->
+                            <!-- form start -->
+                            <form role="form" action="{{route('user.update',$user->id)}}" method="post">
+                                    @csrf
+                                @method('put')
+                                <div class="  card-body">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" name="name" value="{{$user->name}}"class="form-control" id="name" placeholder="Enter Name">
+                                        @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" name="email" value="{{$user->email}}"class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                        @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="phone">Phone Number</label>
+                                        <input type="text" name="phone" value="{{$user->phone}}"class="form-control" id="phone" placeholder="Enter Phone Number">
+                                        @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+
+
+                                </div>
+                                <!-- /.card-body -->
+
+                                <div class="card-footer">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
                         </div>
                         <!-- /.card -->
 
 
-                        <!-- /.card -->
+
                     </div>
                     <!--/.col (left) -->
                     <!-- right column -->

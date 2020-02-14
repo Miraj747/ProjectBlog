@@ -15,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-    $data['users']=User::all();
+    $data['table']=User::all();
     return view('admin.user.index',$data);
     }
 
@@ -69,9 +69,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        $data['user']=$user;
+        return view('admin.user.edit',$data);
     }
 
     /**
@@ -81,9 +82,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+
+        $request->validate([
+            'name'=>'required',
+
+            'email'=>'required|email|unique:users,email,'.$user->id,
+
+
+            'phone'=>'required|unique:users,phone,'.$user->id,
+        ]);
+
+
+        $user -> update($request->all());
+        return redirect()->route('user.index');
     }
 
     /**
@@ -92,8 +105,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('user.index');
     }
 }
