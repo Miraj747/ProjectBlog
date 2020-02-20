@@ -1,4 +1,14 @@
 @extends('layouts.admin.master')
+@section('breadcrumb')
+
+    <!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+
+@endsection
 @section('main part')
     <div class="row">
         <div class="col-lg-3 col-6">

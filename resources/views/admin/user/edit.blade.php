@@ -1,4 +1,14 @@
 @extends('layouts.admin.master')
+@section('breadcrumb')
+
+    <!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{route('user.index')}}">Users</a></li>
+            <li class="breadcrumb-item active">Update User</li>
+        </ol>
+        @endsection
 @section('main part')
     <div class="row">
         <!-- left column -->
@@ -14,33 +24,7 @@
                     @csrf
                     @method('put')
                     <div class="  card-body">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" value="{{$user->name}}"class="form-control" id="name" placeholder="Enter Name">
-                            @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" name="email" value="{{$user->email}}"class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                            @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="text" name="phone" value="{{$user->phone}}"class="form-control" id="phone" placeholder="Enter Phone Number">
-                            @error('phone')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-
-
-
+                        @include('layouts.admin._form')
                     </div>
                     <!-- /.card-body -->
 

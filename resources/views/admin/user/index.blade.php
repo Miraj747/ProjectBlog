@@ -1,10 +1,22 @@
 @extends('layouts.admin.master')
+@section('breadcrumb')
+
+    <!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{route('user.index')}}">Users</a></li>
+            <li class="breadcrumb-item active">All Users</li>
+        </ol>
+        @endsection
 @section('main part')
     <div class="row">
         <!-- left column -->
         <div class="col-md-12">
+
             <div class="card">
                 <div class="card-header">
+
                     <h3 class="card-title">All Users List</h3>
 
                     <div class="card-tools">
@@ -40,7 +52,7 @@
                                     <form action="{{route('user.destroy',$user->id)}}" method="post">
                                         @csrf
                                         @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm"> DELETE</button>
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Do you really want to delete?')"> DELETE</button>
                                     </form>
                                 </td>
                             </tr>

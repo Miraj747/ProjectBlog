@@ -1,4 +1,14 @@
 @extends('layouts.admin.master')
+@section('breadcrumb')
+ <!-- /.col -->
+    <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{{route('user.index')}}">Users</a></li>
+            <li class="breadcrumb-item active">Create New User</li>
+        </ol>
+
+@endsection
 @section('main part')
     <div class="row">
         <!-- left column -->
@@ -6,36 +16,14 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Add new user</h3>
+                    <h3 class="card-title">Create New User</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
                 <form role="form" action="{{route('user.store')}}" method="post">
                     @csrf
                     <div class="  card-body">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" value="{{old('name')}}"class="form-control" id="name" placeholder="Enter Name">
-                            @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" name="email" value="{{old('email')}}"class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                            @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="text" name="phone" value="{{old('phone')}}"class="form-control" id="phone" placeholder="Enter Phone Number">
-                            @error('phone')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+                      @include('layouts.admin._form')
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">

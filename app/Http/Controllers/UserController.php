@@ -14,7 +14,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {$data['title']="List of Users";
     $data['table']=User::all();
     return view('admin.user.index',$data);
     }
@@ -25,8 +25,8 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-     return view('admin.user.create');
+    {$data['title']="Create New User";
+     return view('admin.user.create',$data);
     }
 
     /**
@@ -49,6 +49,7 @@ class UserController extends Controller
         $data=$request->all();
         $data['password']=Hash::make($data['password']);
             User::create($data);
+            session()->flash('message','User Created Successfully');
             return redirect()->route('user.index');
     }
 
@@ -71,7 +72,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $data['title']="Update User";
         $data['user']=$user;
+
         return view('admin.user.edit',$data);
     }
 
@@ -96,6 +99,7 @@ class UserController extends Controller
 
 
         $user -> update($request->all());
+        session()->flash('message','User Updated Successfully');
         return redirect()->route('user.index');
     }
 
@@ -108,6 +112,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+        session()->flash('error','User deleted Successfully');
         return redirect()->route('user.index');
     }
 }
