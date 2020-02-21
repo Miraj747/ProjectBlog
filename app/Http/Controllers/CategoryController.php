@@ -14,7 +14,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+$data['title']='All Categories';
+$data['categories']=Category::paginate(2);
+$data['serial']=($data['categories']->currentPage()) !=1?($data['categories']->perPage()*(($data['categories'])->currentPage()-1))+1:1;
+
+return view('admin.category.index',$data);
     }
 
     /**
@@ -24,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $data['title']='Create New Category';
+        return view('admin.category.create',$data);
     }
 
     /**
@@ -35,7 +40,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'status'=>'required'
+        ]);
+
+        Category::create($request->all());
+        session()->flash('message','Category added successfully');
+        return redirect()->route('category.index');
     }
 
     /**
@@ -57,7 +69,10 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
+        $data['title']="Edit Category";
+        $data['category']=$category;
+        return view('admin.category.edit',$data);
     }
 
     /**
@@ -69,7 +84,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name'=>'required'
+            ,
+        ]);
+        $category->update($request->all());
+dd($category);
+        session()->flash('message','Category updated successfully');
+        return redirect()->route('category.index');
     }
 
     /**

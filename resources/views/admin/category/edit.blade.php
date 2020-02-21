@@ -5,8 +5,8 @@
     <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="{{route('user.index')}}">Users</a></li>
-            <li class="breadcrumb-item active">Update User</li>
+            <li class="breadcrumb-item"><a href="{{route('category.index')}}">Category</a></li>
+            <li class="breadcrumb-item active">Update Category</li>
         </ol>
         @endsection
 @section('main part')
@@ -16,15 +16,15 @@
             <!-- general form elements -->
             <div class="card card-primary">
                 <div class="card-header">
-                    <h3 class="card-title">Edit user details</h3>
+                    <h3 class="card-title">Edit category details</h3>
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form role="form" action="{{route('user.update',$user->id)}}" method="post">
+                <form role="form" action="{{route('category.update',$category->id)}}" method="post">
                     @csrf
                     @method('put')
                     <div class="  card-body">
-                        @include('admin.user._form')
+                        @include('admin.category._form')
                     </div>
                     <!-- /.card-body -->
 

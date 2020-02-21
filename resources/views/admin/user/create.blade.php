@@ -23,7 +23,7 @@
                 <form role="form" action="{{route('user.store')}}" method="post">
                     @csrf
                     <div class="  card-body">
-                      @include('layouts.admin._form')
+                      @include('admin.user._form')
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
